@@ -1,0 +1,14 @@
+<h1>Welcome to dojjo</h1>
+
+<% if user_signed_in? -%>
+  Hello, <%= current_user.email %>, you are signed in!
+  <%= link_to 'Sign out', destroy_user_session_path %>
+  <%= link_to 'goto user', user_path(current_user) %>
+
+<% else -%>
+  Please 
+  <%= link_to 'Sign in', new_user_session_path %>
+  or 
+  <%= link_to 'Sign up', new_user_registration_path %>
+
+<% end -%>

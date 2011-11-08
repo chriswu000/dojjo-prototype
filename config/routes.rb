@@ -1,4 +1,30 @@
 Prototype::Application.routes.draw do
+  get "pages/home"
+
+  devise_for :users
+  #resources :users do
+  #  resources :entries do
+  #    resources :items 
+  #  end
+  #end
+
+  resources :users, :only => :show do |users|
+    resources :entries, :only => :show
+  end
+
+  resources :entries do
+    resources :items, :only => :show
+  end
+
+  resources :items
+
+  namespace :user do
+    root :to => 'users#show'
+  end 
+
+  root :to => 'pages#home'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

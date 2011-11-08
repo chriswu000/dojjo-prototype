@@ -1,0 +1,8 @@
+  <div class="entry_summary round">
+    <span class="entry_date">Entry Date:</span>
+    <%= entry_date entry_summary.entry_date %> 
+    <%= link_to 'Edit Entry', edit_entry_path(entry_summary), %><br />
+    <%= entry_summary.items.first.content unless entry_summary.items.empty? %>
+  </div>
+  <br />
+

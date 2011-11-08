@@ -1,0 +1,62 @@
+body {
+  background: #CFF;
+}
+.container {
+  width: 800px;
+  background: white;
+  padding: 5%;
+}
+
+.button {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.nolink {
+  text-decoration: none;
+  color: black;
+}
+
+div.item {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  overflow: auto;
+}
+
+div.item_action {
+  float: left;
+}
+
+div.item_content {
+  width: 97%;
+  float: left;
+}
+
+div.entry_summary {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+span.entry_date {
+  font-weight: bold;
+}
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
+
+textarea.fill_div {
+  width: 98%;
+}
+
+textarea.item_font {
+  font-family: inherit;
+}

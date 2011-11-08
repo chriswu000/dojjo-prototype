@@ -1,0 +1,12 @@
+<div class="item round">
+  <% if !@item_to_edit.nil? && (item.id == @item_to_edit.id) -%>
+    <%= render 'form', :item => item %>
+  <% else -%>
+    <div class="item_content"><%= link_to item.content, edit_item_path(item), :class=>"nolink" %></div>
+    <div class="item_action">
+      <span class="button round">
+        <%= link_to 'X', item, :confirm => 'Are you sure?', :method => :delete, :class => "nolink" %>
+      </span>
+    </div>
+  <% end -%>
+</div><br />

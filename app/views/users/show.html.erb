@@ -1,0 +1,4 @@
+<h1><%= current_user.email %> journal</h1>
+<p><%= link_to 'Sign Out', destroy_user_session_path %></p>
+<p><%= link_to 'New entry', new_entry_path %></p>
+<%= render :partial => "entries/entry_summary", :collection => @entries %>
