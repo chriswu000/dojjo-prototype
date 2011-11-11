@@ -2,12 +2,14 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.xml
   def create
-    @item = Item.new(params[:item])
+   @entry = Entry.find(params[:item][:entry_id])
+   @item = @entry.items.build(params[:item])
+   @item_to_edit = @entry.items.build
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
-        format.xml  { render :xml => @item, :status => :created, :location => @item }
+        format.html { render 'entries/edit' }
+        format.xml  { head :ok }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }

@@ -3,12 +3,33 @@ class EntriesController < ApplicationController
   # GET /entries/new
   # GET /entries/new.xml
   def new
-    @entry = current_user.entries.new
+    @entry = current_user.entries.create;
+    @item_to_edit = @entry.items.build;
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @entry }
+      format.html { render 'entries/edit' }
     end
+  
+  #  begin
+  #    Entry.transaction do
+  #      @entry = current_user.entries.create!;
+  #      @item_to_edit = @entry.items.create!;
+  #    end
+  #  rescue
+  #    # did not save.  properly
+  #    flash[:notice] += @entry.errors if @entry.new_record?
+  #    flash[:notice] += @item_to_edit.errors if @entry.new_record?
+  #    
+  #    respond_to do |format|
+  #      format.html redirect_to user_path(current_user)
+  #      format.xml # do something here 
+  #    end
+  #  else
+  #    respond_to do |format|
+  #      format.html { render 'entries/edit' }
+  #      format.xml  { render :xml => @entry, :status => :created, :location => @entry }
+  #    end
+  #  end
   end
 
   def show
@@ -19,7 +40,7 @@ class EntriesController < ApplicationController
   # GET /entries/1/edit
   def edit
     @entry = Entry.find(params[:id])
-    @item_to_edit = nil
+    @item_to_edit = @entry.items.build;
   end
 
   # POST /entries
