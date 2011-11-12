@@ -7,9 +7,11 @@ class ItemsController < ApplicationController
    @entry = Entry.find(params[:item][:entry_id])
    @item = @entry.items.build(params[:item])
    @item_to_edit = @entry.items.build
+   @item_to_edit.is_draft = true
 
     respond_to do |format|
       if @item.save
+        @item = @item_to_edit
         format.html { render 'entries/edit' }
         format.xml  { head :ok }
       else
@@ -36,6 +38,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
+        @item = @item_to_edit
         format.html { render 'entries/edit' }
         format.xml  { head :ok }
       else
