@@ -2,7 +2,7 @@ class CreateEntries < ActiveRecord::Migration
   def self.up
     create_table :entries do |t|
       t.integer :user_id
-      t.datetime :entry_date
+      t.datetime :entry_date, :default => Date.today
 
       t.timestamps
     end

@@ -1,6 +1,7 @@
 <div class="item round">
-  <% if !@item_to_edit.nil? && (item.id == @item_to_edit.id) -%>
-    <%= render 'items/form', :item => @item_to_edit %>
+  <% #if !@item_to_edit.nil? && (item.id == @item_to_edit.id) -%>
+  <% if item.is_draft? -%>
+    <%= render 'items/form', :item => item %>
   <% else -%>
     <div class="item_content"><%= link_to item.content, edit_item_path(item), :class=>"nolink" %></div>
     <div class="item_action">

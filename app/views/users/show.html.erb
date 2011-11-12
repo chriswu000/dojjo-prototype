@@ -1,4 +1,21 @@
 <h1><%= current_user.email %> journal</h1>
 <p><%= link_to 'Sign Out', destroy_user_session_path %></p>
+
+<div id="calendar">
+  <div id="month">
+    <div class="month_surround"><%= link_to "<<<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-%d") %></div>
+    <div class="month_center"><%=h @date.strftime("%B %Y") %></div>
+    <div class="month_surround"><%= link_to ">>>", :month => (@date.end_of_month+1).strftime("%Y-%m-%d") %></div>
+  </div>
+  <%= calendar_for @entries,:year => @date.year, :month => @date.month do |calendar| %>
+    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ) %>
+    <%= calendar.day(:day_method => :entry_date) do |date, entries| %>
+      <div><%= date.day %></div>
+      <div class="number_of_entries" ><%= entries.count unless entries.count == 0 %></div>
+    <% end -%>
+  <% end -%>
+</div>
+
 <p><%= link_to 'New entry', new_entry_path %></p>
+
 <%= render :partial => "entries/entry_summary", :collection => @entries %>

@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_filter :authenticate_user!
+
   # POST /items
   # POST /items.xml
   def create
@@ -23,6 +25,15 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @entry = @item.entry
 
+    # if there are no blanks, build a draft item to fill in
+    @item_to_edit = @entry.items.detect { |item| item.content.blank? }
+    if @item_to_edit.nil?
+      @item_to_edit = @entry.items.build
+    end
+
+    @item_to_edit.is_draft = true
+
+
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { render 'entries/edit' }
@@ -35,9 +46,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item_to_edit = Item.find(params[:id])
-    @entry = @item_to_edit.entry
-
+    @item = Item.find(params[:id])
+    @entry = @item.entry
+    @entry.items.detect{ |item| item.id == @item.id }.is_draft = true
+      
     respond_to do |format|
       format.html { render 'entries/edit' }
     end
@@ -48,10 +60,20 @@ class ItemsController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @entry = @item.entry
+
+    # if there are no blanks, build a draft item to fill in
+    @item_to_edit = @entry.items.detect { |item| item.content.blank? }
+    if @item_to_edit.nil?
+      @item_to_edit = @entry.items.build
+    end
+
+    @item_to_edit.is_draft = true
+
+
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(edit_entry_path(@entry)) }
+      format.html { render 'entries/edit' }
       format.xml  { head :ok }
     end
   end

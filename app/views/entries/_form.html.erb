@@ -12,8 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :entry_date %><br />
-    <%= f.date_select :entry_date %>
+    <%= f.text_field :entry_date, :value => (entry_date @entry.entry_date) %>
   </div>
   <div class="actions">
     <%= f.submit 'Save date' %>

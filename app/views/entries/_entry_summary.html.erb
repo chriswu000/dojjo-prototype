@@ -2,7 +2,8 @@
     <span class="entry_date">
       <%= entry_date entry_summary.entry_date %> 
     </span>
-    <%= link_to 'Edit Entry', edit_entry_path(entry_summary), %><br />
+    <%= link_to 'edit', edit_entry_path(entry_summary), %>&nbsp
+    <%= link_to 'delete', entry_summary, :confirm => 'Are you sure?', :method => :delete %><br />
     <%= entry_summary.items.first.content unless entry_summary.items.empty? %>
   </div>
   <br />

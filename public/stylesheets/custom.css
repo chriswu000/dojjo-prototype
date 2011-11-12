@@ -60,3 +60,92 @@ textarea.fill_div {
 textarea.item_font {
   font-family: inherit;
 }
+
+#calendar table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#calendar td,
+#calendar th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 10px;
+  padding: 3px;
+  border: 1px solid #999;
+}
+
+#calendar th {
+  background: #DDD;
+  color: #666;
+  text-align: center;
+  width: 14.2857142857143%;
+}
+
+#calendar td {
+  background: #FFF;
+  color: #777;
+  height: 40px;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+#calendar .notmonth {
+  color: #CCC;
+}
+
+#calendar #month {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#calendar #month a, #calendar #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #999;
+}
+
+#calendar .today {
+  background-color: #D7F2FF;
+}
+
+#calendar ul {
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+}
+
+#calendar li {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  text-align: center;
+}
+
+.number_of_entries {
+  font-size: 18px;
+  text-align: center;
+  color: red;
+}
+
+#month {
+  width: 50%;
+  font-size: 20px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#month .month_surround {
+  width: 33%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#month .month_center {
+  width: 33%;
+  display: inline-block;
+  vertical-align: middle;
+}

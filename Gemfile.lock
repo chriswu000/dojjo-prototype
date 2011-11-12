@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/jchunky/table_builder.git
+  revision: 861e57bc1c1cddcf877db950fb400226be15ea71
+  specs:
+    table_builder (0.0.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -52,6 +58,9 @@ GEM
       ipsum-core (>= 2.0.0)
     ipsum-latin (1.1.0)
       ipsum-core (>= 2.0.0)
+    jquery-rails (1.0.17)
+      railties (~> 3.0)
+      thor (~> 0.14)
     json (1.6.1)
     mail (2.2.19)
       activesupport (>= 2.3.6)
@@ -112,6 +121,8 @@ DEPENDENCIES
   factory_girl_rails (= 1.0)
   faker (= 0.3.1)
   ipsum
+  jquery-rails (>= 1.0.12)
   rails (= 3.0.9)
   rspec-rails (= 2.6.1)
   sqlite3
+  table_builder (= 0.0.3)!

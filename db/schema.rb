@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20111103172455) do
 
   create_table "entries", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "entry_date"
+    t.datetime "entry_date", :default => '2011-11-12 00:00:00'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
