@@ -6,12 +6,12 @@ class ItemsController < ApplicationController
   def create
    @entry = Entry.find(params[:item][:entry_id])
    @item = @entry.items.build(params[:item])
-   @item_to_edit = @entry.items.build
-   @item_to_edit.is_draft = true
 
     respond_to do |format|
       if @item.save
-        @item = @item_to_edit
+        @item = @entry.items.build
+        @item.is_draft = true
+
         format.html { render 'entries/edit' }
         format.xml  { head :ok }
       else
@@ -25,20 +25,20 @@ class ItemsController < ApplicationController
   # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
-    @entry = @item.entry
-
-    # if there are no blanks, build a draft item to fill in
-    @item_to_edit = @entry.items.detect { |item| item.content.blank? }
-    if @item_to_edit.nil?
-      @item_to_edit = @entry.items.build
-    end
-
-    @item_to_edit.is_draft = true
-
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        @item = @item_to_edit
+        @entry = @item.entry
+
+        # if there are no blanks, build a draft item to fill in
+        @item = @entry.items.detect { |item| item.content.blank? }
+
+        if @item.nil?
+          @item = @entry.items.build
+        end
+
+        @item.is_draft = true
+
         format.html { render 'entries/edit' }
         format.xml  { head :ok }
       else
@@ -62,18 +62,16 @@ class ItemsController < ApplicationController
   # DELETE /items/1.xml
   def destroy
     @item = Item.find(params[:id])
+    @item.destroy
     @entry = @item.entry
 
     # if there are no blanks, build a draft item to fill in
-    @item_to_edit = @entry.items.detect { |item| item.content.blank? }
-    if @item_to_edit.nil?
-      @item_to_edit = @entry.items.build
+    @item = @entry.items.detect { |item| item.content.blank? }
+    if @item.nil?
+      @item = @entry.items.build
     end
 
-    @item_to_edit.is_draft = true
-
-
-    @item.destroy
+    @item.is_draft = true
 
     respond_to do |format|
       format.html { render 'entries/edit' }
