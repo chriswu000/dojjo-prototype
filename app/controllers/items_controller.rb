@@ -9,10 +9,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        @item = @entry.items.build
-        @item.is_draft = true
-
-        format.html { render 'entries/edit' }
+        format.html { redirect_to edit_entry_path :id => @item.entry, :item_anchor => @item }
         format.xml  { head :ok }
       else
         format.html { render :action => "new" }
@@ -28,18 +25,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        @entry = @item.entry
-
-        # if there are no blanks, build a draft item to fill in
-        @item = @entry.items.detect { |item| item.content.blank? }
-
-        if @item.nil?
-          @item = @entry.items.build
-        end
-
-        @item.is_draft = true
-
-        format.html { render 'entries/edit' }
+        format.html { redirect_to edit_entry_path :id => @item.entry, :item_anchor => @item }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -50,11 +36,9 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @entry = @item.entry
-    @entry.items.detect{ |item| item.id == @item.id }.is_draft = true
       
     respond_to do |format|
-      format.html { render 'entries/edit' }
+      format.html { redirect_to edit_entry_path :id => @item.entry, :item => @item, :item_anchor => @item }
     end
   end
 
@@ -63,18 +47,9 @@ class ItemsController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    @entry = @item.entry
-
-    # if there are no blanks, build a draft item to fill in
-    @item = @entry.items.detect { |item| item.content.blank? }
-    if @item.nil?
-      @item = @entry.items.build
-    end
-
-    @item.is_draft = true
 
     respond_to do |format|
-      format.html { render 'entries/edit' }
+      format.html { redirect_to edit_entry_path @item.entry }
       format.xml  { head :ok }
     end
   end

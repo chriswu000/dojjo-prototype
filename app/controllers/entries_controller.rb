@@ -5,11 +5,9 @@ class EntriesController < ApplicationController
   # GET /entries/new.xml
   def new
     @entry = current_user.entries.create
-    @item = @entry.items.build
-    @item.is_draft = true
 
-    respond_to do |format|
-      format.html { render 'entries/edit' }
+     respond_to do |format|
+        format.html { redirect_to edit_entry_path @entry  }
     end
   
   end
@@ -17,14 +15,26 @@ class EntriesController < ApplicationController
   # GET /entries/1/edit
   def edit
     @entry = Entry.find(params[:id])
+    @action = "update"
 
-    # if there are no blanks, build a draft item to fill in
-    @item = @entry.items.detect { |item| item.content.blank? }
-    if @item.nil?
-      @item = @entry.items.build
+    if params[:item]
+      @item = @entry.items.detect { |item| item.id == Item.find(params[:item]).id }
+    else
+      # if there are no blanks, build a draft item to fill in
+      @item = @entry.items.detect { |item| item.content.blank? }
+      if @item.nil?
+        @item = @entry.items.build
+        @action = "create"
+      end
     end
-
     @item.is_draft = true
+
+    # anchor to the item submitted as a parameter if exists, otherwise the blank item
+    @item_anchor = params[:item_anchor] ? Item.find(params[:item_anchor]) : @item
+    if params[:item_anchor]
+    else 
+
+    end
   end
 
   
@@ -33,19 +43,11 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
 
-    # if there are no blanks, build a draft item to fill in
-    @item = @entry.items.detect { |item| item.content.blank? }
-    if @item.nil?
-      @item = @entry.items.build
-    end
-
-    @item.is_draft = true
-
-    respond_to do |format|
+     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { render 'entries/edit' }
+        format.html { redirect_to edit_entry_path }
       else
-        format.html { render 'entries/edit' }
+        format.html { redirect_to edit_entry_path }
       end
     end
   end
@@ -57,7 +59,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_path(current_user) }
+      format.html { redirect_to user_path current_user  }
       format.xml  { head :ok }
     end
   end

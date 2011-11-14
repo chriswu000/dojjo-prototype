@@ -55,6 +55,7 @@ span.entry_date {
 
 textarea.fill_div {
   width: 98%;
+  height: 100px;
 }
 
 textarea.item_font {

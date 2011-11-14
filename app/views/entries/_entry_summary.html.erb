@@ -4,7 +4,7 @@
     </span>
     <%= link_to 'edit', edit_entry_path(entry_summary), %>&nbsp
     <%= link_to 'delete', entry_summary, :confirm => 'Are you sure?', :method => :delete %><br />
-    <%= entry_summary.items.first.content unless entry_summary.items.empty? %>
+    <%= simple_format(entry_summary.items.first.content) unless entry_summary.items.empty? %>
   </div>
   <br />
 
