@@ -12,6 +12,11 @@
   <% end %>
   <%= f.hidden_field :entry_id %>
   <div class="field">
+    <%= f.label "Item tags:" %><br />
+    <%= f.text_field :tag_list, :value => item.tag_list.sort.to_s, :class => "item_tag_list" %>
+  </div>
+
+  <div class="field">
     <%= f.text_area :content, :class => "fill_div item_font" %>
   </div>
   <div class="actions">

@@ -58,6 +58,17 @@ textarea.fill_div {
   height: 100px;
 }
 
+div.entry_tag_list,
+div.item_tag_list a {
+  color: red;
+}
+
+input.entry_tag_list,
+input.item_tag_list {
+  width: 75%;
+  color: red;
+}
+
 textarea.item_font {
   font-family: inherit;
 }

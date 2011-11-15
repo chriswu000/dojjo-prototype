@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'devise', '1.1.rc0'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'table_builder', '0.0.3', :git => 'git://github.com/jchunky/table_builder.git'
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'rspec-rails', '2.6.1'

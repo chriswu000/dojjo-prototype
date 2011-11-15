@@ -34,6 +34,8 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
+    acts-as-taggable-on (2.1.1)
+      rails
     arel (2.0.10)
     builder (2.1.2)
     devise (1.1.rc0)
@@ -109,7 +111,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.30)
+    tzinfo (0.3.31)
     warden (0.10.7)
       rack (>= 1.0.0)
 
@@ -117,6 +119,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   devise (= 1.1.rc0)
   factory_girl_rails (= 1.0)
   faker (= 0.3.1)

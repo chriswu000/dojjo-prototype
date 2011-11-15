@@ -5,6 +5,7 @@
   <% if item.is_draft? -%>
     <%= render 'items/form', :item => item %>
   <% else -%>
+    <div class="item_tag_list"><%= link_to "TAGS: #{item.tag_list.sort.to_s}", edit_item_path(item, :anchor => "item_anchor"), :class => "nolink" %></div>
     <div class="item_content"><%= link_to simple_format(item.content), edit_item_path(item, :anchor => "item_anchor"), :class => "nolink" %></div>
     <div class="item_action">
       <span class="button round">

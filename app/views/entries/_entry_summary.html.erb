@@ -4,6 +4,9 @@
     </span>
     <%= link_to 'edit', edit_entry_path(entry_summary), %>&nbsp
     <%= link_to 'delete', entry_summary, :confirm => 'Are you sure?', :method => :delete %><br />
+    <%= content_tag(:div,
+                    "Entry Tags: #{entry_summary.tag_list.sort.to_s}",
+                    :class => "entry_tag_list") unless entry_summary.tag_list.empty? %>
     <%= simple_format(entry_summary.items.first.content) unless entry_summary.items.empty? %>
   </div>
   <br />
