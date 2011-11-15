@@ -7,5 +7,7 @@ class Entry < ActiveRecord::Base
 
   default_scope :order => 'entries.entry_date DESC'
 
+  named_scope :filter_date, lambda { | filter_date = Date.today | { :conditions => ["DATE(entry_date) = ?", filter_date] } }
+
 
 end

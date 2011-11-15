@@ -11,11 +11,17 @@
     <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ) %>
     <%= calendar.day(:day_method => :entry_date) do |date, entries| %>
       <div><%= date.day %></div>
-      <div class="number_of_entries" ><%= entries.count unless entries.count == 0 %></div>
+      <div class="number_of_entries" >
+
+        <% if entries.count != 0 -%>
+          <%= link_to entries.count, user_path(current_user, :filter_date => @date.change(:day => date.day)) %>
+        <% end -%>
+      </div>
     <% end -%>
   <% end -%>
 </div>
 
+<h3>Showing Entries for: <%= @filter_text %> <%= link_to 'Show all entries', current_user %></h3>
 <p><%= link_to 'New entry', new_entry_path %></p>
 
-<%= render :partial => "entries/entry_summary", :collection => @entries %>
+<%= render :partial => "entries/entry_summary", :collection => @entries_to_show %>

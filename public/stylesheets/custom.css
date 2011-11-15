@@ -60,13 +60,13 @@ textarea.fill_div {
 
 div.entry_tag_list,
 div.item_tag_list a {
-  color: red;
+  color: green;
 }
 
 input.entry_tag_list,
 input.item_tag_list {
   width: 75%;
-  color: red;
+  color: green;
 }
 
 textarea.item_font {
@@ -136,9 +136,11 @@ textarea.item_font {
   text-align: center;
 }
 
-.number_of_entries {
+.number_of_entries,
+.number_of_entries a {
   font-size: 18px;
   text-align: center;
+  margin: auto;
   color: red;
 }
 
