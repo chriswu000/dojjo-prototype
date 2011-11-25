@@ -5,16 +5,21 @@
     <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
     <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
     <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
-    <%= stylesheet_link_tag "jquery-ui-1.8.16.custom.css" %>
+    <%= stylesheet_link_tag "jquery-ui-1.8.16.custom.css", "token-input-facebook" %>
     <%= stylesheet_link_tag 'custom', :media => 'screen' %>
 
-    <%= javascript_include_tag "jquery.min.js", "jquery-ui-1.8.16.custom.min.js", "jquery_ujs.js", "application" %>
+    <%= javascript_include_tag "jquery.min.js", "jquery-ui-1.8.16.custom.min.js", "jquery_ujs.js", "application", "jquery.tokeninput" %>
 
     <%= csrf_meta_tag %>
   </head>
   <body>
     <div class="container round">
+      <section class="round">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
       <%= yield %>
+      </section>
     </div>
 
     <%= debug(params) if Rails.env.development? %>

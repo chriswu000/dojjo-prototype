@@ -1,6 +1,11 @@
 <div class="item round">
   <% if item == @item_anchor -%>
     <a name="item_anchor"></a>
+    <section class="round">
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, :class => "flash #{key}") %>
+    <% end %>
+    </section>
   <% end -%>
   <% if item.is_draft? -%>
     <%= render 'items/form', :item => item %>

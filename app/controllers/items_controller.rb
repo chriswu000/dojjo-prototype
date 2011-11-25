@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+        flash[:success] = "Item saved"
         format.html { redirect_to edit_entry_path :id => @item.entry, :item_anchor => @item }
         format.xml  { head :ok }
       else
@@ -26,6 +27,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.update_attributes(params[:item])
 
+        flash[:success] = "Item updated"
         format.html { redirect_to edit_entry_path :id => @item.entry, :item_anchor => @item }
         format.xml  { head :ok }
       else
@@ -54,4 +56,16 @@ class ItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def tag_list
+    respond_to do |format|
+      format.html
+      @tag_list = Item.tag_counts.where('tags.name like ?', "%#{params[:q]}%").map { |tag| { :id => tag.name, :name => tag.name } }
+      @tag_list << { "id" => params[:q], "name" => params[:q] }
+      format.json { render :json =>  @tag_list }
+    end
+
+  end
 end
+
+

@@ -138,6 +138,7 @@ textarea.item_font {
 
 .number_of_entries,
 .number_of_entries a {
+  text-decoration: none;
   font-size: 18px;
   text-align: center;
   margin: auto;

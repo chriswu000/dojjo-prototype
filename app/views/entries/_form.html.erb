@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label "Entry tags:" %><br />
-    <%= f.text_field :tag_list, :value => @entry.tag_list.sort.to_s, :class => "entry_tag_list" %>
+    <%= f.text_field :tag_list, "data-pre" => entry.tags.order('name ASC').map { |tag| { :id => tag.name, :name => tag.name } }.to_json %>
   </div>
   <div class="field">
     <%= f.text_field :entry_date, :value => (entry_date @entry.entry_date) %>

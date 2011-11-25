@@ -29,8 +29,8 @@ class EntriesController < ApplicationController
     end
     @item.is_draft = true
 
-    # anchor to the item submitted as a parameter if exists, otherwise the blank item
-    @item_anchor = params[:item_anchor] ? Item.find(params[:item_anchor]) : @item
+    # anchor to the item submitted as a parameter if exists, otherwise nil
+    @item_anchor = params[:item_anchor] ? Item.find(params[:item_anchor]) : nil
     if params[:item_anchor]
     else 
 
@@ -45,6 +45,7 @@ class EntriesController < ApplicationController
 
      respond_to do |format|
       if @entry.update_attributes(params[:entry])
+        flash[:success] = "Entry updated"
         format.html { redirect_to edit_entry_path }
       else
         format.html { redirect_to edit_entry_path }
@@ -63,4 +64,15 @@ class EntriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def tag_list
+    respond_to do |format|
+      format.html
+      @tag_list = Entry.tag_counts.where('tags.name like ?', "%#{params[:q]}%").map { |tag| { :id => tag.name, :name => tag.name } }
+      @tag_list << { "id" => params[:q], "name" => params[:q] }
+      format.json { render :json =>  @tag_list }
+    end
+
+  end
+
 end

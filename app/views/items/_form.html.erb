@@ -13,7 +13,7 @@
   <%= f.hidden_field :entry_id %>
   <div class="field">
     <%= f.label "Item tags:" %><br />
-    <%= f.text_field :tag_list, :value => item.tag_list.sort.to_s, :class => "item_tag_list" %>
+    <%= f.text_field :tag_list, "data-pre" => item.tags.order('name ASC').map { |tag| { :id => tag.name, :name => tag.name } }.to_json %> 
   </div>
 
   <div class="field">

@@ -14,9 +14,12 @@ Prototype::Application.routes.draw do
 
   resources :entries do
     resources :items, :only => :show
+    get 'tag_list', :on => :collection
   end
 
-  resources :items
+  resources :items do 
+    get 'tag_list', :on => :collection
+  end
 
   namespace :user do
     root :to => 'users#show'

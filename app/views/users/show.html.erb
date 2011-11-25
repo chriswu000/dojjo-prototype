@@ -21,7 +21,7 @@
   <% end -%>
 </div>
 
-<h3>Showing Entries for: <%= @filter_text %> <%= link_to 'Show all entries', current_user %></h3>
+<h3>Showing Entries for: <%= @filter_text %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Show all entries', current_user %></h3>
 <p><%= link_to 'New entry', new_entry_path %></p>
 
 <%= render :partial => "entries/entry_summary", :collection => @entries_to_show %>
